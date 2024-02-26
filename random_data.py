@@ -30,7 +30,6 @@ def final(p):
 def rentals(p):
     rentals = []
     
-    # for i in range(1, p):
     i =1
     while len(rentals) <= p :
         
@@ -39,8 +38,9 @@ def rentals(p):
         start = str(gen_date())
         end = str(gen_date())
         ids = [row["id"] for row in assets]
+        date_list = [ row["start_date"] for row in rentals ] if len(rentals) != 0 else []      
         now = datetime.now().strftime("%Y-%m-%d")
-        if start < end and start < now:
+        if start < end and start < now  and start not in date_list :
             dict = {
                 "id": i,
                 "asset_id": int(random.sample(ids, k=1)[0]),
@@ -56,7 +56,6 @@ if __name__ == "__main__":
     print(rentals(100))
 
 # using Recursion
-
 
 # def gen_date():
 
