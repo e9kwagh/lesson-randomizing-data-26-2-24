@@ -14,10 +14,10 @@ def create_assets(p):
     li = []
     now = datetime.now()
 
-    for _ in range(3):
+    for i in range(p):
         purchase_date = gen_date()
-        if now > datetime.strptime(purchase_date, "%Y-%m-%d"):
-            asset_dict = {"id": p, "purchase_date": purchase_date}
+        if now > datetime.strptime(purchase_date, "%Y-%m-%d") :
+            asset_dict = {"id": i , "purchase_date": purchase_date}
             li.append(asset_dict)
             break
 
