@@ -3,30 +3,25 @@ from datetime import date, datetime, timedelta
 
 
 def gen_date():
-    year = 2024
-    month = random.randint(1, 12)
-    day = random.randint(1, 28)
-    date = datetime(year, month, day).strftime("%Y-%m-%d")
-    return date
-
+    start_date = date(2000, 1, 1)
+    end_date = date.today()
+    random_date = start_date + timedelta(days=random.randint(0, (end_date - start_date).days))
+    return random_date
 
 def create_assets(p):
     li = []
-    now = datetime.now()
-
+    date_list = [ row["purchase_date"] for row in li ] if len(li) != 0 else []
     for i in range(p):
         purchase_date = gen_date()
-        if now > datetime.strptime(purchase_date, "%Y-%m-%d") :
+        if purchase_date not in date_list :
             asset_dict = {"id": i , "purchase_date": purchase_date}
             li.append(asset_dict)
-            break
-
     return li
 
 
 def final(p):
     result = []
-    for i in range(1, 9):
+    for i in range(1, p):
         assets = create_assets(i)
         result.extend(assets)
     return result
@@ -37,8 +32,8 @@ def rentals(p):
     for i in range(1, p):
         dict = {}
         assets = final(p)
-        start = gen_date()
-        end = gen_date()
+        start = str(gen_date())
+        end = str(gen_date())
         ids = [row["id"] for row in assets]
         now = datetime.now().strftime("%Y-%m-%d")
         if start < end and start < now:
@@ -73,18 +68,15 @@ if __name__ == "__main__":
 
 
 # def create_assets(p,li):
-
-
+#     date_list =  [ row["purchase_date"] for row in li ]
 #     dict={}
-
 #     now  =  datetime.now().strftime("%Y-%m-%d")
 #     date =  gen_date()
-#     if now > date :
+#     if now > date  and not date_list in date :
 #             dict = { "id": p , "purchase_date" :date}
 #             li.append(dict)
 #     else :
 #             create_assets(p,li)
-
 #     return li
 
 # def final():
@@ -92,6 +84,7 @@ if __name__ == "__main__":
 #     for i in range(1,8):
 #        final=  create_assets(i,li)
 #        li.extend(final)
+
 #     return li
 
 # if __name__ == "__main__":
