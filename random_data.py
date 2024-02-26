@@ -29,7 +29,11 @@ def final(p):
 
 def rentals(p):
     rentals = []
-    for i in range(1, p):
+    
+    # for i in range(1, p):
+    i =1
+    while len(rentals) <= p :
+        
         dict = {}
         assets = final(p)
         start = str(gen_date())
@@ -44,12 +48,11 @@ def rentals(p):
                 "end_date": end,
             }
             rentals.append(dict)
-
+            i += 1      
     return rentals
 
 
 if __name__ == "__main__":
-
     print(rentals(100))
 
 # using Recursion
